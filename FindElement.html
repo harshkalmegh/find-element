@@ -7,5 +7,56 @@
     <title>Document</title>
   </head>
   <body></body>
-  <script></script>
+  <script>
+    /**
+     * Algorithm
+     * 1. Create a function findElement passing two parameters object and keys
+     * 2. handle all edgecase
+     * 3. convert element into array (by split method)
+     * 4. loop the array
+     * 5. pass the keys as obj and store in obj
+     * 6. traverse the obj with the keys
+     * 7. check if keys are undefined (return 0)
+     * 7.1. if keys are correct return the output
+     */
+
+    let obj = {
+      a: { b: { c: 2, d: [1, 2, 3] }, e: undefined, f: null },
+    };
+    // output = { c: 2, d: [1, 2, 3] }
+
+    function findElement(obj, element) {
+      if (
+        !obj ||
+        !element ||
+        typeof obj !== "object" ||
+        typeof element !== "string"
+      ) {
+        return "Enter Proper Value";
+      }
+      const _path = element.split(".");
+      for (let keys of _path) {
+        // console.log("obj before if", obj);
+        // console.log("obj", obj[keys]);
+        if (!obj.hasOwnProperty(keys)) {
+          return 0;
+        }
+        obj = obj[keys];
+        // console.log("obj", obj[keys]);
+
+        // let newObj = obj[keys];
+        // console.log("keys", keys);
+        // console.log("obj", obj);
+        // console.log("array", Object.keys(obj));
+      }
+
+      // if (_path.includes(keys)) {
+      //     return obj;
+      //   } else {
+      //     return 0;
+      //   }
+      return obj;
+    }
+    console.log(findElement(obj, "a.f"));
+  </script>
 </html>
